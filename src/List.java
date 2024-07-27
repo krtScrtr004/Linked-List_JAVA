@@ -1,5 +1,5 @@
 public class List {
-    public class Node {
+    public static class Node {
         private Integer _data;
         private Node _prev, _next;
 
@@ -15,7 +15,7 @@ public class List {
         }
     }
 
-    private Node _head, _tail;
+    private final Node _head, _tail;
     private int _size;
 
     // Default constructor
@@ -81,9 +81,23 @@ public class List {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
+        // unlink node
         Node temp = nodeAtPos(index);
         temp._prev._next = temp._next;
         temp._next._prev = temp._prev;
+
+        // nullify temp for garbage collection
+        temp._prev = null;
+        temp._next = null;
+
+        this._size--;
+    }
+
+    public final void clear() {
+        int counter = 0;
+        while (counter < _size) {
+            remove(counter);
+        }
     }
 
     public final void print() {
@@ -105,16 +119,7 @@ public class List {
 
         System.out.println();
 
-        myList.remove(myList.size() - 1);
+        myList.clear();
         myList.print();
-
-        System.out.println();
-        System.out.println(myList.getFirst());
-
-        System.out.println();
-        System.out.println(myList.getLast());
-
-        System.out.println();
-        System.out.println(myList.getAt(1));
     }
 }
