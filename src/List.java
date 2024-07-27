@@ -1,5 +1,5 @@
 public class List {
-    private class Node {
+    public class Node {
         private Integer _data;
         private Node _prev, _next;
 
@@ -7,6 +7,11 @@ public class List {
             this._data = null;
             this._prev = null;
             this._next = null;
+        }
+
+        @Override
+        public String toString() {
+            return _data.toString();
         }
     }
 
@@ -26,7 +31,11 @@ public class List {
         this._size = 0;
     }
 
-    private final Node nodeAtPos(final int index) {
+//    public List(final List other) {
+//        // Copy constructor
+//    }
+
+    private Node nodeAtPos(final int index) {
         Node temp = this._head._next;
         int count = 0;
         while (count < index && temp != this._tail) {
@@ -36,11 +45,22 @@ public class List {
         return temp;
     }
 
-//    public List(final List other) {
-//        // Copy constructor
-//    }
 
-    public final int size() { return this._size; }
+    public final int size() {
+        return this._size;
+    }
+
+    public final Node getFirst() {
+        return (_size > 0 ?  this._head._next : null);
+    }
+
+    public final Node getLast() {
+        return (_size > 0 ?  this._tail._prev : null);
+    }
+
+    public final Node getAt(final int index) {
+        return (_size > 0 ? nodeAtPos(index) : null);
+    }
 
     public final void insert(final int index, final int data) {  // zero based index
         if (index < 0)
@@ -87,5 +107,14 @@ public class List {
 
         myList.remove(myList.size() - 1);
         myList.print();
+
+        System.out.println();
+        System.out.println(myList.getFirst());
+
+        System.out.println();
+        System.out.println(myList.getLast());
+
+        System.out.println();
+        System.out.println(myList.getAt(1));
     }
 }
