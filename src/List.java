@@ -57,6 +57,15 @@ public class List {
         this._size++;
     }
 
+    public final void remove(final int index) {
+        if (index < 0 || index >= this._size)
+            throw new IndexOutOfBoundsException("Index out of bounds!");
+
+        Node temp = nodeAtPos(index);
+        temp._prev._next = temp._next;
+        temp._next._prev = temp._prev;
+    }
+
     public final void print() {
         Node temp = this._head._next;
         while (temp != this._tail) {
@@ -71,7 +80,12 @@ public class List {
         myList.insert(1, 1);
         myList.insert(1, 4);
         myList.insert(0, 10);
-        myList.insert(myList.size(), 100); 
+        myList.insert(myList.size(), 100);
+        myList.print();
+
+        System.out.println();
+
+        myList.remove(myList.size() - 1);
         myList.print();
     }
 }
