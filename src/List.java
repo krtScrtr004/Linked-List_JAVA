@@ -58,11 +58,11 @@ public class List {
         return (_size > 0 ?  this._tail._prev : null);
     }
 
-    public final Node getAt(final int index) {
+    public final Node get(final int index) {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
-    public final void insert(final int index, final int data) {  // zero based index
+    public final void add(final int index, final int data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -110,11 +110,11 @@ public class List {
 
     public static void main(String[] args) {
         List myList = new List();
-        myList.insert(0, 0);
-        myList.insert(1, 1);
-        myList.insert(1, 4);
-        myList.insert(0, 10);
-        myList.insert(myList.size(), 100);
+        myList.add(0, 0);
+        myList.add(1, 1);
+        myList.add(1, 4);
+        myList.add(0, 10);
+        myList.add(myList.size(), 100);
         myList.print();
 
         System.out.println();
