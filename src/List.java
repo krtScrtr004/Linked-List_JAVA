@@ -105,6 +105,10 @@ public class List {
         this._size++;
     }
 
+    public void addLast(final int data) {
+        add(data);
+    }
+
     public final void remove(final int index) {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -148,6 +152,8 @@ public class List {
 //        myList.add(520);
         myList.addFirst(78);
         myList.addFirst(8);
+        myList.addLast(100);
+        myList.addLast(120);
         myList.print();
 
 //        System.out.println();
