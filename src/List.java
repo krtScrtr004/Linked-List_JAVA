@@ -53,17 +53,18 @@ public class List {
     }
 
     public final Node getFirst() {
-        return (_size > 0 ?  this._head._next : null);
+        return (_size > 0 ? this._head._next : null);
     }
 
     public final Node getLast() {
-        return (_size > 0 ?  this._tail._prev : null);
+        return (_size > 0 ? this._tail._prev : null);
     }
 
     public final Node get(final int index) {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
+    // Append node at the end of the list
     public void add(final int data) {
         Node temp = this._tail._prev;
         Node newNode = new Node();
@@ -76,6 +77,7 @@ public class List {
         this._size++;
     }
 
+    // Append the node before the current node at index 'index'
     public final void add(final int index, final int data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -88,6 +90,18 @@ public class List {
         newNode._next = temp;
         temp._prev._next = newNode;
         temp._prev = newNode;
+        this._size++;
+    }
+
+    public void addFirst(final int data) {
+        Node temp = this._head._next;
+        Node newNode = new Node();
+        newNode._data = data;
+
+        newNode._prev = this._head;
+        newNode._next = temp;
+        temp._prev = newNode;
+        this._head._next = newNode;
         this._size++;
     }
 
@@ -124,14 +138,16 @@ public class List {
 
     public static void main(String[] args) {
         List myList = new List();
-        myList.add(0, 0);
-        myList.add(1, 1);
-        myList.add(1, 4);
-        myList.add(0, 10);
-        myList.add(myList.size(), 100);
-        myList.add(500);
-        myList.add(510);
-        myList.add(520);
+//        myList.add(0, 0);
+//        myList.add(1, 1);
+//        myList.add(1, 4);
+//        myList.add(0, 10);
+//        myList.add(myList.size(), 100);
+//        myList.add(500);
+//        myList.add(510);
+//        myList.add(520);
+        myList.addFirst(78);
+        myList.addFirst(8);
         myList.print();
 
 //        System.out.println();
