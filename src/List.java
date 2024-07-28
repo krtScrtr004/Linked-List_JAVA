@@ -46,23 +46,23 @@ public class List {
     }
 
 
-    public final int size() {
+    public int size() {
         return this._size;
     }
 
-    public final Node getFirst() {
+    public Node getFirst() {
         return (_size > 0 ?  this._head._next : null);
     }
 
-    public final Node getLast() {
+    public Node getLast() {
         return (_size > 0 ?  this._tail._prev : null);
     }
 
-    public final Node get(final int index) {
+    public Node get(final int index) {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
-    public final void add(final int index, final int data) {  // zero based index
+    public void add(final int index, final int data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -77,7 +77,7 @@ public class List {
         this._size++;
     }
 
-    public final void remove(final int index) {
+    public void remove(final int index) {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -93,14 +93,14 @@ public class List {
         this._size--;
     }
 
-    public final void clear() {
+    public void clear() {
         int counter = 0;
         while (counter < _size) {
             remove(counter);
         }
     }
 
-    public final void print() {
+    public void print() {
         Node temp = this._head._next;
         while (temp != this._tail) {
             System.out.println(temp._data);
