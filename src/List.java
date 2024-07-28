@@ -64,19 +64,6 @@ public class List {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
-    // Append node at the end of the list
-    public void add(final int data) {
-        Node temp = this._tail._prev;
-        Node newNode = new Node();
-        newNode._data = data;
-
-        newNode._prev = temp;
-        newNode._next = this._tail;
-        temp._next = newNode;
-        this._tail._prev = newNode;
-        this._size++;
-    }
-
     // Append the node before the current node at index 'index'
     public final void add(final int index, final int data) {  // zero based index
         if (index < 0)
@@ -106,7 +93,15 @@ public class List {
     }
 
     public void addLast(final int data) {
-        add(data);
+        Node temp = this._tail._prev;
+        Node newNode = new Node();
+        newNode._data = data;
+
+        newNode._prev = temp;
+        newNode._next = this._tail;
+        temp._next = newNode;
+        this._tail._prev = newNode;
+        this._size++;
     }
 
     public final void remove(final int index) {
