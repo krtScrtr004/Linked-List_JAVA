@@ -1,3 +1,5 @@
+// TODO: remove final keyword to methods
+
 public class List {
     public static class Node {
         private Integer _data;
@@ -62,6 +64,18 @@ public class List {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
+    public void add(final int data) {
+        Node temp = this._tail._prev;
+        Node newNode = new Node();
+        newNode._data = data;
+
+        newNode._prev = temp;
+        newNode._next = this._tail;
+        temp._next = newNode;
+        this._tail._prev = newNode;
+        this._size++;
+    }
+
     public final void add(final int index, final int data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -115,11 +129,14 @@ public class List {
         myList.add(1, 4);
         myList.add(0, 10);
         myList.add(myList.size(), 100);
+        myList.add(500);
+        myList.add(510);
+        myList.add(520);
         myList.print();
 
-        System.out.println();
-
-        myList.clear();
-        myList.print();
+//        System.out.println();
+//
+//        myList.clear();
+//        myList.print();
     }
 }
