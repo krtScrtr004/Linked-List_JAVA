@@ -1,4 +1,4 @@
-// TODO: remove final keyword to methods
+import java.util.Objects;
 
 public class List {
     public static class Node {
@@ -9,6 +9,23 @@ public class List {
             this._data = null;
             this._prev = null;
             this._next = null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+
+            if (o == null || getClass() != o.getClass())
+                return false;
+
+            Node node = (Node) o;
+            return (_data != null ? this._data.equals(node._data) : node._data == null);
+        }
+
+        @Override
+        public int hashCode() {
+            return (_data != null ? _data.hashCode() : 0);
         }
 
         @Override
@@ -47,6 +64,15 @@ public class List {
         return temp;
     }
 
+    private Node searchNode(final int data) {
+        Node temp = this._head._next;
+        while (temp != this._tail) {
+            if (temp._data == data) {
+
+            }
+        }
+    }
+
 
     public int size() {
         return this._size;
@@ -64,6 +90,7 @@ public class List {
         return (_size > 0 ? nodeAtPos(index) : null);
     }
 
+    /* Node insertion methods */
     public void add(final int index, final int data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -103,6 +130,9 @@ public class List {
         this._size++;
     }
 
+    /* Node removal methods */
+
+    // remove node at index 'index'
     public final void remove(final int index) {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -115,7 +145,6 @@ public class List {
         // nullify temp for garbage collection
         temp._prev = null;
         temp._next = null;
-
         this._size--;
     }
 
