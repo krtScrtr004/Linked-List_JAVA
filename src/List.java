@@ -64,13 +64,14 @@ public class List {
         return temp;
     }
 
-    private Node searchNode(final int data) {
+    private Node searchNode(final Node node) {
         Node temp = this._head._next;
         while (temp != this._tail) {
-            if (temp._data == data) {
-
-            }
+            if (temp.equals(node))
+                return temp;
+            temp = temp._next;
         }
+        return null;
     }
 
 
@@ -131,9 +132,15 @@ public class List {
     }
 
     /* Node removal methods */
+    public void remove(final Node node) {
+        Node temp = searchNode(node);
+        temp._prev._next = temp._next;
+        temp._next._prev = temp._prev;
+        this._size--;
+    }
 
     // remove node at index 'index'
-    public final void remove(final int index) {
+    public void remove(final int index) {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -169,16 +176,11 @@ public class List {
         myList.add(1, 1);
         myList.add(1, 4);
         myList.add(0, 10);
-        myList.add(myList.size(), 100);
-        myList.addFirst(78);
-        myList.addFirst(8);
-        myList.addLast(100);
-        myList.addLast(120);
         myList.print();
 
         System.out.println();
 
-        myList.clear();
+        myList.remove(myList.get(0));
         myList.print();
     }
 }
