@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class List {
     public static class Node {
         private Integer _data;
@@ -133,11 +131,15 @@ public class List {
 
     /* Node removal methods */
     // remove first occurence of node 'node' in the last
-    public void remove(final Node node) {
+    public Node remove(final Node node) {
         Node temp = searchNode(node);
+        if (temp == null)
+            return null;
+
         temp._prev._next = temp._next;
         temp._next._prev = temp._prev;
         this._size--;
+        return temp;
     }
 
     // remove node at index 'index'
