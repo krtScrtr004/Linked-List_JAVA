@@ -1,3 +1,5 @@
+// TODO: remove final keyword to methods
+
 public class List {
     public static class Node {
         private Integer _data;
@@ -54,8 +56,8 @@ public class List {
         return (_size > 0 ?  this._head._next : null);
     }
 
-    public Node getLast() { 
-        return (_size > 0 ?  this._tail._prev : null);
+    public Node getLast() {
+        return (_size > 0 ? this._tail._prev : null);
     }
 
     public Node get(final int index) {
@@ -77,7 +79,31 @@ public class List {
         this._size++;
     }
 
-    public void remove(final int index) {
+    public void addFirst(final int data) {
+        Node temp = this._head._next;
+        Node newNode = new Node();
+        newNode._data = data;
+
+        newNode._prev = this._head;
+        newNode._next = temp;
+        temp._prev = newNode;
+        this._head._next = newNode;
+        this._size++;
+    }
+
+    public void addLast(final int data) {
+        Node temp = this._tail._prev;
+        Node newNode = new Node();
+        newNode._data = data;
+
+        newNode._prev = temp;
+        newNode._next = this._tail;
+        temp._next = newNode;
+        this._tail._prev = newNode;
+        this._size++;
+    }
+
+    public final void remove(final int index) {
         if (index < 0 || index >= this._size)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -115,6 +141,10 @@ public class List {
         myList.add(1, 4);
         myList.add(0, 10);
         myList.add(myList.size(), 100);
+        myList.addFirst(78);
+        myList.addFirst(8);
+        myList.addLast(100);
+        myList.addLast(120);
         myList.print();
 
         System.out.println();
