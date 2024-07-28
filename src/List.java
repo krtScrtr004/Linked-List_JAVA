@@ -54,7 +54,7 @@ public class List {
         return (_size > 0 ?  this._head._next : null);
     }
 
-    public Node getLast() {
+    public Node getLast() { 
         return (_size > 0 ?  this._tail._prev : null);
     }
 
