@@ -132,6 +132,7 @@ public class List {
     }
 
     /* Node removal methods */
+    // remove first occurence of node 'node' in the last
     public void remove(final Node node) {
         Node temp = searchNode(node);
         temp._prev._next = temp._next;
@@ -153,6 +154,14 @@ public class List {
         temp._prev = null;
         temp._next = null;
         this._size--;
+    }
+
+    public void removeFirst() {
+        remove(0);
+    }
+
+    public void removeLast() {
+        remove(this._size - 1);
     }
 
     public void clear() {
@@ -180,7 +189,8 @@ public class List {
 
         System.out.println();
 
-        myList.remove(myList.get(0));
+        myList.removeFirst();
+        myList.removeLast();
         myList.print();
     }
 }
