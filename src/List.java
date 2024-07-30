@@ -11,6 +11,11 @@ public class List <T> {
             this._next = null;
         }
 
+        public void unlink() {
+            this._prev = null;
+            this._next = null;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o)
@@ -101,6 +106,32 @@ public class List <T> {
 
     public Node get(final int index) {
         return (_size > 0 ? nodeAtPos(index) : null);
+    }
+
+    // return and unlink first node from the list
+    public Node pollFirst() {
+        if (this._size < 1)
+            return null;
+
+        Node temp = this._head._next;
+        this._head._next = temp._next;
+        this._head._next._prev = this._head;
+        temp.unlink();
+        this._size--;
+        return temp;
+    }
+
+    // return and unlink last node from the list
+    public Node pollLast() {
+        if (this._size < 1)
+            return null;
+
+        Node temp = this._tail._prev;
+        this._tail._prev = temp._prev;
+        temp._prev._next = this._tail;
+        temp.unlink();
+        this._size--;
+        return temp;
     }
 
     /* Node insertion methods */
@@ -206,8 +237,24 @@ public class List <T> {
 
         System.out.println();
 
-        myList.removeFirst();
+      /*  myList.removeFirst();
         myList.removeLast();
+        myList.print();*/
+
+        List<String>.Node temp = myList.pollFirst();
+        System.out.println(temp);
+
+        System.out.println();
+
+        myList.print();
+
+        System.out.println();
+
+        List<String>.Node temp1 = myList.pollLast();
+        System.out.println(temp1);
+
+        System.out.println();
+
         myList.print();
     }
 }
