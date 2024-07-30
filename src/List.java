@@ -95,6 +95,20 @@ public class List <T> implements Cloneable {
         return (searchNode(node) != null ? true: false);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        Node temp = this._head._next;
+        while (temp != this._tail) {
+            str.append(temp);
+            if (temp._next != this._tail) {
+                str.append(", ");
+            }
+            temp = temp._next;
+        }
+        return str.toString();
+    }
+
     /* Node retrieval */
 
     public int indexOf(final Node node) {
@@ -230,21 +244,13 @@ public class List <T> implements Cloneable {
         }
     }
 
-    public void print() {
-        Node temp = this._head._next;
-        while (temp != this._tail) {
-            System.out.println(temp._data);
-            temp = temp._next;
-        }
-    }
-
     public static void main(String[] args) {
         List<String> myList = new List<>();
         myList.add(0, "a");
         myList.add(1, "b");
         myList.add(1, "c");
         myList.add(0, "d");
-        myList.print();
+        System.out.println(myList);
 
         System.out.println();
 
