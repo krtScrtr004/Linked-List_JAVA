@@ -79,6 +79,18 @@ public class List <T> {
         return this._size;
     }
 
+    /* Node retrieval */
+
+    public int indexOf(final Node node) {
+        Node temp = this._head._next;
+        for (int i = 0; temp != this._tail; i++) {
+            if (temp.equals(node))
+                return i;
+            temp = temp._next;
+        }
+        return -1;
+    }
+
     public Node getFirst() {
         return (_size > 0 ?  this._head._next : null);
     }
@@ -92,6 +104,7 @@ public class List <T> {
     }
 
     /* Node insertion methods */
+
     public void add(final int index, final T data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
