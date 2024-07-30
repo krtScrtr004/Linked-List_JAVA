@@ -1,6 +1,8 @@
-public class List {
-    public static class Node {
-        private Integer _data;
+import java.util.Objects;
+
+public class List <T> {
+    public class Node {
+        private T _data;
         private Node _prev, _next;
 
         public Node() {
@@ -18,7 +20,7 @@ public class List {
                 return false;
 
             Node node = (Node) o;
-            return (_data != null ? this._data.equals(node._data) : node._data == null);
+            return (Objects.equals(this._data, node._data));
         }
 
         @Override
@@ -90,7 +92,7 @@ public class List {
     }
 
     /* Node insertion methods */
-    public void add(final int index, final int data) {  // zero based index
+    public void add(final int index, final T data) {  // zero based index
         if (index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds!");
 
@@ -105,7 +107,7 @@ public class List {
         this._size++;
     }
 
-    public void addFirst(final int data) {
+    public void addFirst(final T data) {
         Node temp = this._head._next;
         Node newNode = new Node();
         newNode._data = data;
@@ -117,7 +119,7 @@ public class List {
         this._size++;
     }
 
-    public void addLast(final int data) {
+    public void addLast(final T data) {
         Node temp = this._tail._prev;
         Node newNode = new Node();
         newNode._data = data;
@@ -182,11 +184,11 @@ public class List {
     }
 
     public static void main(String[] args) {
-        List myList = new List();
-        myList.add(0, 0);
-        myList.add(1, 1);
-        myList.add(1, 4);
-        myList.add(0, 10);
+        List<String> myList = new List<>();
+        myList.add(0, "a");
+        myList.add(1, "b");
+        myList.add(1, "c");
+        myList.add(0, "d");
         myList.print();
 
         System.out.println();
