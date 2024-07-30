@@ -91,6 +91,10 @@ public class List <T> implements Cloneable {
         return super.clone();
     }
 
+    public boolean contains(final Node node) {
+        return (searchNode(node) != null ? true: false);
+    }
+
     /* Node retrieval */
 
     public int indexOf(final Node node) {
@@ -244,12 +248,9 @@ public class List <T> implements Cloneable {
 
         System.out.println();
 
-        List<String> myList2 = new List<>();
-        try {
-            myList2 = (List) myList.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-        myList2.print();
+        List<String>.Node node = myList.new Node();
+        node = myList.getFirst();
+
+        System.out.println((myList.contains(node)) ? "True" : "False");
     }
 }
