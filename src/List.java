@@ -176,7 +176,8 @@ public class List <T> {
     }
 
     /* Node removal methods */
-    // remove first occurence of node 'node' in the last
+
+    // remove first occurrence of node 'node' in the last
     public Node remove(final Node node) {
         Node temp = searchNode(node);
         if (temp == null)
@@ -184,6 +185,7 @@ public class List <T> {
 
         temp._prev._next = temp._next;
         temp._next._prev = temp._prev;
+        temp.unlink();
         this._size--;
         return temp;
     }
@@ -199,8 +201,7 @@ public class List <T> {
         temp._next._prev = temp._prev;
 
         // nullify temp for garbage collection
-        temp._prev = null;
-        temp._next = null;
+        temp.unlink();
         this._size--;
     }
 
