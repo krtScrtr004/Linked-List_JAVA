@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class List <T> {
+public class List <T> implements Cloneable {
     public class Node {
         private T _data;
         private Node _prev, _next;
@@ -79,9 +79,16 @@ public class List <T> {
         return null;
     }
 
+    /* Utilities */
 
     public int size() {
         return this._size;
+    }
+
+    // shallow copy
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     /* Node retrieval */
@@ -237,24 +244,12 @@ public class List <T> {
 
         System.out.println();
 
-      /*  myList.removeFirst();
-        myList.removeLast();
-        myList.print();*/
-
-        List<String>.Node temp = myList.pollFirst();
-        System.out.println(temp);
-
-        System.out.println();
-
-        myList.print();
-
-        System.out.println();
-
-        List<String>.Node temp1 = myList.pollLast();
-        System.out.println(temp1);
-
-        System.out.println();
-
-        myList.print();
+        List<String> myList2 = new List<>();
+        try {
+            myList2 = (List) myList.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        myList2.print();
     }
 }
