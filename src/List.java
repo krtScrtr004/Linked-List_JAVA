@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class List <T> {
+public class List <T> implements Cloneable {
     public class Node {
         private T _data;
         private Node _prev, _next;
@@ -79,9 +79,34 @@ public class List <T> {
         return null;
     }
 
+    /* Utilities */
 
     public int size() {
         return this._size;
+    }
+
+    // shallow copy
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public boolean contains(final Node node) {
+        return (searchNode(node) != null ? true: false);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        Node temp = this._head._next;
+        while (temp != this._tail) {
+            str.append(temp);
+            if (temp._next != this._tail) {
+                str.append(", ");
+            }
+            temp = temp._next;
+        }
+        return str.toString();
     }
 
     /* Node retrieval */
@@ -220,42 +245,19 @@ public class List <T> {
         }
     }
 
-    public void print() {
-        Node temp = this._head._next;
-        while (temp != this._tail) {
-            System.out.println(temp._data);
-            temp = temp._next;
-        }
-    }
-
     public static void main(String[] args) {
         List<String> myList = new List<>();
         myList.add(0, "a");
         myList.add(1, "b");
         myList.add(1, "c");
         myList.add(0, "d");
-        myList.print();
+        System.out.println(myList);
 
         System.out.println();
 
-      /*  myList.removeFirst();
-        myList.removeLast();
-        myList.print();*/
+        List<String>.Node node = myList.new Node();
+        node = myList.getFirst();
 
-        List<String>.Node temp = myList.pollFirst();
-        System.out.println(temp);
-
-        System.out.println();
-
-        myList.print();
-
-        System.out.println();
-
-        List<String>.Node temp1 = myList.pollLast();
-        System.out.println(temp1);
-
-        System.out.println();
-
-        myList.print();
+        System.out.println((myList.contains(node)) ? "True" : "False");
     }
 }
