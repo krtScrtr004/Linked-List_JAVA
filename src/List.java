@@ -39,7 +39,8 @@ public class List <T> implements Cloneable {
         }
     }
 
-    private final Node _head, _tail;
+    private Node _head;
+    private Node _tail;
     private int _size;
 
     // Default constructor
@@ -107,6 +108,21 @@ public class List <T> implements Cloneable {
             temp = temp._next;
         }
         return str.toString();
+    }
+
+    public void reverse() {
+        Node temp = this._head;
+        while (temp != null) {
+            Node origNext = temp._next;
+
+            temp._next = temp._prev;
+            temp._prev = origNext;
+            temp = origNext;
+        }
+
+        Node swap = this._head;
+        this._head = this._tail;
+        this._tail = swap;
     }
 
     /* Node retrieval */
@@ -247,17 +263,19 @@ public class List <T> implements Cloneable {
 
     public static void main(String[] args) {
         List<String> myList = new List<>();
-        myList.add(0, "a");
-        myList.add(1, "b");
-        myList.add(1, "c");
+        myList.add(0, "h");
+        myList.add(0, "g");
+        myList.add(0, "f");
+        myList.add(0, "e");
         myList.add(0, "d");
+        myList.add(0, "c");
+        myList.add(0, "b");
+        myList.add(0, "a");
         System.out.println(myList);
 
         System.out.println();
 
-        List<String>.Node node = myList.new Node();
-        node = myList.getFirst();
-
-        System.out.println((myList.contains(node)) ? "True" : "False");
+        myList.reverse();
+        System.out.println(myList);
     }
 }
