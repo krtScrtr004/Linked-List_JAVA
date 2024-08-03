@@ -1,6 +1,12 @@
+import java.util.Iterator;
 import java.util.Objects;
 
-public class List <T> implements Cloneable {
+public class List <T> implements Cloneable, Iterable<> {
+    private Node _head;
+    private Node _tail;
+    private int _size;
+
+    // Node class
     public class Node {
         private T _data;
         private Node _prev, _next;
@@ -39,9 +45,25 @@ public class List <T> implements Cloneable {
         }
     }
 
-    private Node _head;
-    private Node _tail;
-    private int _size;
+    private class ListIterator implements Iterator<> {
+        private Node cursor;
+
+        public ListIterator() {
+            cursor = List.this._head._next;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (!cursor._next.equals(List.this._tail) || cursor._next != null);
+        }
+
+        @Override
+        public T next() {
+            T data = cursor._data;
+            cursor = (hasNext() ? cursor._next : List.this._tail);
+            return data;
+        }
+    }
 
     // Default constructor
     public List() {
@@ -259,6 +281,11 @@ public class List <T> implements Cloneable {
         while (counter < _size) {
             remove(counter);
         }
+    }
+
+    @Override
+    public Iterator<> iterator {
+
     }
 
     public static void main(String[] args) {
