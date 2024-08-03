@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.Objects;
 
-public class List <T> implements Cloneable, Iterable<> {
+public class List <T> implements Cloneable, Iterable<T> {
     private Node _head;
     private Node _tail;
     private int _size;
@@ -45,7 +45,8 @@ public class List <T> implements Cloneable, Iterable<> {
         }
     }
 
-    private class ListIterator implements Iterator<> {
+    // Iterator class
+    public class ListIterator implements Iterator<T> {
         private Node cursor;
 
         public ListIterator() {
@@ -54,13 +55,13 @@ public class List <T> implements Cloneable, Iterable<> {
 
         @Override
         public boolean hasNext() {
-            return (!cursor._next.equals(List.this._tail) || cursor._next != null);
+            return (cursor != null && cursor._next != null);
         }
 
         @Override
         public T next() {
             T data = cursor._data;
-            cursor = (hasNext() ? cursor._next : List.this._tail);
+            cursor = cursor._next;
             return data;
         }
     }
@@ -284,17 +285,12 @@ public class List <T> implements Cloneable, Iterable<> {
     }
 
     @Override
-    public Iterator<> iterator {
-
+    public Iterator<T> iterator() {
+        return new ListIterator();
     }
 
     public static void main(String[] args) {
         List<String> myList = new List<>();
-        myList.add(0, "h");
-        myList.add(0, "g");
-        myList.add(0, "f");
-        myList.add(0, "e");
-        myList.add(0, "d");
         myList.add(0, "c");
         myList.add(0, "b");
         myList.add(0, "a");
@@ -303,6 +299,9 @@ public class List <T> implements Cloneable, Iterable<> {
         System.out.println();
 
         myList.reverse();
-        System.out.println(myList);
+//        System.out.println(myList);
+        System.out.println("Using Iterator: ");
+        for (String str : myList)
+            System.out.println(str);
     }
 }
